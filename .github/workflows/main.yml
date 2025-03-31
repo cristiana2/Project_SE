@@ -1,0 +1,11 @@
+name: CI
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  build:  # Note: job name is "build" as specified
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Step
+        run: echo "Building..."  # Replace with your actual build command

@@ -1,11 +1,19 @@
-name: CI
+name: CI Pipeline for .NET 9 MVC
 on:
-  pull_request:
-    branches: [main]
+  push:
+    branches:
+      - main
 jobs:
-  build:  # Note: job name is "build" as specified
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Build Step
-        run: echo "Building..."  # Replace with your actual build command
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore

@@ -1,6 +1,6 @@
 name: CI Pipeline for .NET 9 MVC
 on:
-  push:
+  pull_request:
     branches:
       - main
 jobs:

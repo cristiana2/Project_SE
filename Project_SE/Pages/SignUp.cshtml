@@ -1,0 +1,159 @@
+﻿@model UserProfileView
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #68437d
+        }
+    </style>
+    <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login">
+            <div class="wrap-login">
+                <div class="login-form-title">Sign up</div>
+                @using (Html.BeginForm("SignUpAccount", "UserAccount", FormMethod.Post))
+                {
+                    <div class="wrap-input">
+                        @Html.TextBoxFor(a => a.Email, new { placeholder = "Email", @class = "input-container", required = "required", id = "emailInput" })
+                        <span id="emailError" style="color: red; display: none;"></span>
+                    </div>
+                    <div class="wrap-input">
+                        @Html.PasswordFor(a => a.Password, new { placeholder = "Password", @class = "input-container", id = "password", required = "required" })
+                    </div>
+                    <div class="wrap-input">
+                        @Html.Password("ConfirmPassword", "", new { placeholder = "Confirm Password", @class = "input-container", id = "confirmPassword", required = "required" })
+                        <span id="confirmPasswordError" style="color: red; display: none;">Passwords do not match</span>
+                    </div>
+                    <div class="wrap-input">
+                        @Html.TextBoxFor(a => a.FirstName, new { placeholder = "First Name", @class = "input-container", required = "required" })
+                    </div>
+                    <div class="wrap-input">
+                        @Html.TextBoxFor(a => a.MiddleName, new { placeholder = "Middle Name", @class = "input-container" })
+                    </div>
+                    <div class="wrap-input">
+                        @Html.TextBoxFor(a => a.LastName, new { placeholder = "Last Name", @class = "input-container", required = "required" })
+                    </div>
+                    <div class="wrap-input">
+                        @Html.TextBoxFor(a => a.BirthDate, new { placeholder = "Birthdate", @class = "input-container", type = "date" })
+                    </div>
+                    <div class="login-form-title">Univerisity Details</div>
+                    <div class="wrap-input">
+                        @Html.DropDownListFor(model => model.UniversityId, Model.Universites, "Select an university", new { id = "UniversityId", @class = "input-container", required = "required" })
+                    </div>
+                    <div class="wrap-input">
+                        @Html.DropDownListFor(model => model.DepartmentId, Model.Departments, "Select a department", new { id = "DepartmentId", @class = "input-container", required = "required" })
+                    </div>
+                    <div class="wrap-input">
+                        @Html.DropDownListFor(model => model.RoleId, Model.Roles, "Select an role", new { id = "RoleId", @class = "input-container", required = "required" })
+                    </div>
+                    <div class="wrap-input" id="schoolYearContainer">
+                        @Html.DropDownListFor(model => model.UniversityYearId, Model.UniversityYears, "Select a school year", new { id = "UniversityYearId", @class = "input-container", required = "required" })
+                    </div>
+                    <div>
+                        <div class="container-login-form-btn">
+
+                            <button class="login-form-btn">
+                                Sign up
+                            </button>
+
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("Document ready");
+            $('#emailInput').on('blur', function () {
+                var email = $(this).val();
+                console.log(validateEmail(email));
+                if (!validateEmail(email)){
+                    $('#emailError').text('Invalid email format').show();
+                }
+                else{
+                    $('#emailError').hide();
+                    checkEmailAvailability(email);
+                }
+            });
+            $("#UniversityId").change(function () {
+                var universityId = $(this).val();
+                console.log("Selected University ID: " + universityId);
+                $.ajax({
+                    url: "/UserAccount/GetDepartments",
+                    type: "GET",
+                    data: { universityId: parseInt(universityId) },
+                    success: function (data) {
+                        $("#DepartmentId").empty();
+                        $.each(data, function (index, item) {
+                            console.log("Selected departmeny ID: " + item.value + item.text);
+                            $("#DepartmentId").append($("<option></option>")
+                                .attr("value", item.value)
+                                .text(item.text));
+                        });
+                    },
+                    error: function () {
+                        console.error("Error fetching departments.");
+                    }
+                });
+            });
+            $("#RoleId").change(function () {
+                var roleId = $(this).val();
+                console.log("Selected Role ID: " + roleId);
+                if (roleId === "2") {
+                    $("#schoolYearContainer").show();
+                } else {
+                    $("#schoolYearContainer").hide();
+                }
+            });
+            checkRoleId();
+            $("#confirmPassword").on("input", function () {
+                var password = $("#password").val();
+                var confirmPassword = $(this).val();
+                if (password === confirmPassword) {
+                    $("#confirmPasswordError").hide();
+                } else {
+                    $("#confirmPasswordError").show();
+                }
+            });
+        });
+        function checkRoleId() {
+            var roleId = $("#RoleId").val();
+            if (roleId === "2") {
+                $("#schoolYearContainer").show();
+                $("#UniversityYearId").prop("required", true);
+            } else {
+                $("#schoolYearContainer").hide();
+                $("#UniversityYearId").prop("required", false);
+            }
+        }
+        function validateEmail(email) {
+            var re = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
+            return re.test(email);
+        }
+        function checkEmailAvailability(email) {
+            $.ajax({
+                url: '/UserAccount/CheckEmailAvailability',
+                type: 'POST',
+                data: { email: email },
+                success: function (response) {
+                    if (response.available) {
+                        $('#emailError').hide();
+                    } else {
+                        $('#emailError').text('Email is already used').show();
+                    }
+                },
+                error: function () {
+                    console.error('Error checking email availability');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_SE", "Project_SE\Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetGraded.BL", "GetGraded.BL\GetGraded.BL.csproj", "{51C04CDA-AFAC-4269-B01E-F59776A71843}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetGraded.Models", "GetGraded.Models\GetGraded.Models.csproj", "{EF54A755-CDE8-455D-9B57-35B59655F09D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{51C04CDA-AFAC-4269-B01E-F59776A71843}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51C04CDA-AFAC-4269-B01E-F59776A71843}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51C04CDA-AFAC-4269-B01E-F59776A71843}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF54A755-CDE8-455D-9B57-35B59655F09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF54A755-CDE8-455D-9B57-35B59655F09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF54A755-CDE8-455D-9B57-35B59655F09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF54A755-CDE8-455D-9B57-35B59655F09D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

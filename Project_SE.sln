@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_SE", "Project_SE\Project_SE.csproj", "{4D141190-C733-434F-8A16-2A6DB5A9DBC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetGraded.BL", "GetGraded.BL\GetGraded.BL.csproj", "{51C04CDA-AFAC-4269-B01E-F59776A71843}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetGraded.Models", "GetGraded.Models\GetGraded.Models.csproj", "{EF54A755-CDE8-455D-9B57-35B59655F09D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{4D141190-C733-434F-8A16-2A6DB5A9DBC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D141190-C733-434F-8A16-2A6DB5A9DBC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D141190-C733-434F-8A16-2A6DB5A9DBC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51C04CDA-AFAC-4269-B01E-F59776A71843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51C04CDA-AFAC-4269-B01E-F59776A71843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51C04CDA-AFAC-4269-B01E-F59776A71843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51C04CDA-AFAC-4269-B01E-F59776A71843}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF54A755-CDE8-455D-9B57-35B59655F09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF54A755-CDE8-455D-9B57-35B59655F09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF54A755-CDE8-455D-9B57-35B59655F09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF54A755-CDE8-455D-9B57-35B59655F09D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

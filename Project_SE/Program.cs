@@ -17,6 +17,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.MapGet("/health", () =>
+  Results.Json(new { status = "Healthy", timestamp = DateTime.UtcNow }));
+
 app.UseHttpsRedirection();
 
 app.UseRouting();

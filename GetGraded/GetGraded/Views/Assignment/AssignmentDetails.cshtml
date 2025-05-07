@@ -1,0 +1,146 @@
+﻿@model AssignmentDetailsView
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .column-container {
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            margin: 50px;
+            padding: 50px 50px 50px 50px;
+        }
+
+        .assignment-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .custom-button, .upload-button {
+            background-color: #68437d;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .upload-button {
+            background-color: #008CBA;
+            position: absolute;
+            right: 50px;
+            bottom: 50px;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="column-container">
+        <div class="assignment-name">@Model.Name</div>
+        <div class="subtitle">Requirements</div>
+        <div>@Model.Description</div>
+        <div class="subtitle">Add a Solution</div>
+
+        @if (Model.Role == 2)
+        {
+            @using (Html.BeginForm("UploadFile", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" name="file" style="display: none;" id="file-upload" onchange="updateFileName(this)" required />
+
+                @Html.HiddenFor(model => model.Id)
+                <label for="file-upload" class="custom-button">Choose File</label>
+                <span id="file-name" class="file-name"></span>
+                <button type="submit" class="upload-button" id="upload-button" disabled>Upload</button>
+            }
+        }
+        else if (Model.Role == 1)
+        {
+            @if (!string.IsNullOrEmpty(Model.PathFile))
+            {
+                <div class="file-name">
+                    Uploaded file: <a href="@Url.Action("DownloadFile", "Assignment", new { filePathName = Model.PathFile })" target="_blank">@System.IO.Path.GetFileName(Model.PathFile)</a>
+                </div>
+            }
+            else
+            {
+                <div class="file-name">No file uploaded.</div>
+            }
+            <div class="subtitle">Add Score</div>
+            @using (Html.BeginForm("SubmitScore", "Assignment", FormMethod.Post))
+            {
+                @Html.HiddenFor(model => model.AnswerId)
+                <div class="form-group">
+                    <label for="score" class="form-label">Score:</label>
+                    <input type="number" id="score" name="score" class="form-control" required min="1" max="100" />
+                    <div class="invalid-feedback">Score must be between 1 and 100.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Score</button>
+            }
+        }
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateFileName(input) {
+            var fileName = input.files[0].name;
+            document.getElementById('file-name').innerText = fileName;
+            document.getElementById('upload-button').disabled = false; // Enable the upload button
+        }
+
+        $(document).ready(function () {
+            $("#file-upload").change(function () {
+                if ($(this).val()) {
+                    $("#upload-button").prop("disabled", false);
+                } else {
+                    $("#upload-button").prop("disabled", true);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

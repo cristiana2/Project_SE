@@ -50,8 +50,8 @@ namespace GetGrader.Tests
         public void CheckIfStudentHasPassed_WhenScoreEqualsPassingScore_ReturnsTrue()
         {
             // Arrangement
-            int score = 70;
-            int passingScore = 70;
+            int score = 80;
+            int passingScore = 80;
 
             // Act
             bool result = studentProfileStrategy.CheckIfStudentHasPassed(score, passingScore);

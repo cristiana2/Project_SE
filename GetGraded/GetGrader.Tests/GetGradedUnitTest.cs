@@ -59,5 +59,21 @@ namespace GetGrader.Tests
             // Assert
             Assert.IsTrue(result);
         }
+
+        [Test]
+        public void CheckIfStudentHasPassed_WhenScoreIsNegative_ReturnsFalse()
+        {
+            // Arrange
+            int score = -5;
+            int passingScore = 70;
+
+            // Act
+            bool result = studentProfileStrategy.CheckIfStudentHasPassed(score, passingScore);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+
     }
 }

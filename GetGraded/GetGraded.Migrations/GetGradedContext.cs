@@ -53,7 +53,7 @@ namespace GetGraded.Migrations
                {
                    Id = 1,
                    Name = "Research Paper",
-                   Description = "Write a research paper on a topic of your choice",
+                   Description = "Write a research paper on a topic of your choice based on chapters 12-18",
                    DepartmentId = 1,
                    UniversityYearId = 1,
                    DeadLine = new DateTime(2024, 05, 18, 12, 30, 0)

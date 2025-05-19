@@ -49,7 +49,7 @@ namespace GetGrader.Tests
         [Test]
         public void CheckIfStudentHasPassed_WhenScoreEqualsPassingScore_ReturnsTrue()
         {
-            // Arrange
+            // Arrangement
             int score = 70;
             int passingScore = 70;
 

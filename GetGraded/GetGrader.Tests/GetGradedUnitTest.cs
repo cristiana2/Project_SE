@@ -73,6 +73,19 @@ namespace GetGrader.Tests
             // Assert
             Assert.IsFalse(result);
         }
+        [Test]
+        public void CheckIfStudentHasPassed_WhenScoreIsVeryHigh_ReturnsTrue()
+        {
+            // Arrange
+            int score = 1000;
+            int passingScore = 70;
+
+            // Act
+            bool result = studentProfileStrategy.CheckIfStudentHasPassed(score, passingScore);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
 
 
     }

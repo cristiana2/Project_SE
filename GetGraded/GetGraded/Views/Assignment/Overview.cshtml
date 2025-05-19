@@ -27,13 +27,13 @@
                 <tr>
                     <th style="width:150px">Assignment</th>
                     <th style="width:150px">Description</th>
-               
-                   @if (Model.Any(a => a.Role == 2))
+
+                    @if (Model.Any(a => a.Role == 2))
                     {
                         <th style="width:150px">Deadline</th>
                         <th style="width:150px">Department</th>
                     }
-                   
+
                 </tr>
             </thead>
             <tbody>
@@ -42,17 +42,17 @@
 
                     <tr>
                         <td>
-                            <div>
+                            <a href="@Url.Action("AssignmentDetails", "Assignment", new {assignmentId=assignment.Id})" title="List View" class="links">
                                 @assignment.Name
-                            </div>
+                            </a>
                         </td>
                         <td>@assignment.Description</td>
                         @if (Model.Any(a => a.Role == 2))
                         {
-                     
-                        <td>@assignment.DeadLine</td>
-                        <td>@assignment.Department.Name</td>
-                        } 
+
+                            <td>@assignment.DeadLine</td>
+                            <td>@assignment.Department.Name</td>
+                        }
                     </tr>
                 }
             </tbody>

@@ -22,7 +22,7 @@ namespace GetGraded.BL.UserProfileStrategy.DI
             return role switch
             {
                 1 => serviceProvider.GetService<TeacherProfileStrategy>(),
-                _ => serviceProvider.GetService<StudentProfileStrategy>(),
+                2 => serviceProvider.GetService<StudentProfileStrategy>(),
             };
         }
 

@@ -21,7 +21,7 @@ namespace GetGrader.Tests
         [Test]
         public void CheckIfStudentHasPassed_WhenScoreIsAbovePassingScore_ReturnsTrue()
         {
-            // Arrange
+            // Arrangement
             int score = 80;
             int passingScore = 70;
 
